@@ -1,0 +1,107 @@
+<html lang="eng">
+<head>
+    <title></title>
+    <style>
+        table {
+            float: left;
+            border-collapse: collapse;
+            border: 2px solid gray;
+            width: 300px;
+        }
+        th {
+            border: 1px solid grey;
+            background-color: dimgray;
+            color: white;
+            text-align: center;
+        }
+        td {
+            padding: 3px;
+            border: 1px solid ;
+            text-align: center;
+        }
+
+        #tableManagement{
+            float: left;
+            position: absolute;
+            margin-left: 20%;
+        }
+        #textBoxAdd{
+            margin-top: 25px;
+        }
+        .textBox{
+            width: 250px;
+            height: 25px;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+        .addTextBox{
+            width: 250px;
+            height: 25px;
+            font-size: 14px;
+            margin-top: 4px;
+        }
+        .ButtonSearch{
+            width: 100px;
+            height: 25px;
+            font-size: 14px;
+            margin-left: 10px;
+            color: white;
+            background-color: cadetblue;
+        }
+        #delButton{
+            width: 100px;
+            height: 25px;
+            font-size: 14px;
+            margin-left: 10px;
+            color: white;
+            background-color: brown;
+        }
+        #addButton{
+            width: 100px;
+            height: 25px;
+            font-size: 14px;
+            margin-top: 7px;
+            color: white;
+            background-color: darkseagreen;
+        }
+        .outputDate{
+            float: left;
+            width: 150px;
+            position: absolute;
+            margin-left: 45%;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Имя</th>
+            <th>Возраст</th>
+        </tr>
+        {{ friends.findAll() }}
+    </table>
+    <form action="/" method="POST" id="tableManagement">
+        <label>
+            <input class="textBox" name="searchID" placeholder="ID" type="text">
+        </label>
+        <input class="ButtonSearch" type="submit" name="searchIDButton" value="Поиск"> <br>
+        <label>
+            <input class="textBox" name="value" placeholder="Имя или возраст" type="text">
+            <input class="ButtonSearch" type="submit" name="searchValueButton" value="Поиск">
+        </label> <br>
+        <label>
+            <input class="textBox" name="delID" placeholder="ID" type="text">
+            <input id="delButton" type="submit" name="delIDButton" value="Удалить">
+        </label> <br>
+        <label>
+            <input class="addTextBox" id="textBoxAdd" name="addName" placeholder="Имя" type="text"> <br>
+            <input class="addTextBox" name="addAge" placeholder="Возраст" type="text"> <br>
+            <input id="addButton" type="submit" name="addButton" value="Добавить">
+        </label> <br>
+    </form>
+    <div class="outputDate"> {{ searchData }} </div> <br>
+</div>
+</body>
+</html>
