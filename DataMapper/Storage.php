@@ -5,32 +5,31 @@ use PDO;
 
 class Storage
 {
-    public array $data = [];
+    public $data;
     private PDO $link;
 
     public function __construct($link)
     {
         $this->link = $link;
-        $this->data = $this->query("select* from Friends");
+        $this->query("select* from Friends", [], Human::class);
     }
 
     public function execute($sql) : void
     {
         $sth = $this->link->prepare($sql);
         $sth->execute();
-        $this->data = $this->query("select* from Friends");
+        $this->query("select* from Friends", [], Human::class);
     }
 
-    private function query($sql): array
+    public function query(string $sql, array $params, string $className = 'stdClass'): void
     {
         $sth = $this->link->prepare($sql);
-        $sth->execute();
+        $result = $sth->execute($params);
 
-        $result = $sth->fetchAll(PDO::FETCH_ASSOC);
+        if (false === $result) {
+            $this->data = null;
+        }
 
-        if ($result === false)
-            return [];
-
-        return  $result;
+        $this->data = $sth->fetchAll(\PDO::FETCH_CLASS, $className);
     }
 }

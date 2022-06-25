@@ -30,9 +30,10 @@ class HumanMapper
     public function find(int $id) : string
     {
         if ($id > 0) {
-            $id -= 1;
-            $name = $this->storage->data[$id]['nameFriend'];
-            $age = $this->storage->data[$id]['age'];
+            $this->storage->query("SELECT* from Friends where id = $id", [], Human::class);
+
+            $name = $this->storage->data->nameFriend;
+            $age = $this->storage->data->age;
             return $name . ' ' . $age . PHP_EOL;
         }
         return "По данному значению ничего не найдено<br>";
@@ -47,8 +48,8 @@ class HumanMapper
             $infoFriend = "";
             foreach ($friends as $friend)
             {
-                if ($friend['nameFriend'] === $value)
-                    $infoFriend .= $friend['nameFriend'] . ' ' . $friend['age'] . ' ';
+                if ($friend->nameFriend === $value)
+                    $infoFriend .= $friend->nameFriend . ' ' . $friend->age . ' ';
             }
 
             if ($infoFriend !== "")
@@ -60,8 +61,8 @@ class HumanMapper
             $infoFriend = "";
             foreach ($friends as $friend)
             {
-                if ($friend['age'] == $value)
-                    $infoFriend .= $friend['nameFriend'] . ' ' . $friend['age'] . ' ';
+                if ($friend->age == $value)
+                    $infoFriend .= $friend->nameFriend . ' ' . $friend->age . ' ';
             }
 
             if ($infoFriend !== "")

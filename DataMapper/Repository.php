@@ -37,9 +37,9 @@ class Repository
 
         foreach ($arrFriends as $friend)
         {
-            $id = "<td> {$friend['id']} </td>";
-            $name = "<td> {$friend['nameFriend']} </td>";
-            $age = "<td> {$friend['age']} </td>";
+            $id = "<td> $friend->id </td>";
+            $name = "<td> $friend->nameFriend </td>";
+            $age = "<td> $friend->age </td>";
             echo "<tr> $id $name $age </tr>";
         }
     }
